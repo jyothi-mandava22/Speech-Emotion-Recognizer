@@ -4,10 +4,15 @@ import tensorflow as tf
 import sys
 import os
 
-sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
+# Works both locally and on HF Spaces
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'src'))
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src'))
+
 from extract_features import extract_features
 
-model = tf.keras.models.load_model("models/ser_model.keras")
+model = tf.keras.models.load_model(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'models', 'ser_model.keras')
+)
 
 EMOTIONS = ["neutral", "calm", "happy", "sad",
             "angry", "fearful", "disgust", "surprised"]
@@ -20,11 +25,9 @@ EMOJI = {
 def predict_emotion(audio_path):
     if audio_path is None:
         return "No audio received. Please record something."
-
     features = extract_features(audio_path)
     features = features[np.newaxis, ..., np.newaxis]
     probs = model.predict(features, verbose=0)[0]
-
     results = {
         f"{EMOJI[EMOTIONS[i]]} {EMOTIONS[i]}": float(probs[i])
         for i in range(len(EMOTIONS))

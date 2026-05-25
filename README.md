@@ -4,11 +4,19 @@ app_file: app/gradio_app.py
 sdk: gradio
 sdk_version: 6.14.0
 ---
+
 # Speech Emotion Recognizer
 
 A deep learning app that detects emotion from speech audio using a CNN trained on the RAVDESS dataset.
 
 🎙️ **Live Demo**: [huggingface.co/spaces/jyothi22/speech-emotion-recognizer](https://huggingface.co/spaces/jyothi22/speech-emotion-recognizer)
+
+---
+
+## Demo
+
+![Input](assets/demo_input.png)
+![Prediction](assets/demo__prediction.png)
 
 ---
 
@@ -50,13 +58,14 @@ speech_emotion_recognition/
 │   └── ser_model.keras
 ├── app/
 │   └── gradio_app.py
+└── assets/                # Screenshots
 ```
 ---
 
 ## Setup
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/speech-emotion-recognition
+git clone https://github.com/jyothi22/speech-emotion-recognition
 cd speech-emotion-recognition
 python -m venv venv
 venv\Scripts\activate
